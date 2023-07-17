@@ -1,0 +1,27 @@
+/* Treba da napravis obican .txt fajl koji ce sadrzati podatke iz imenika. Format treba da je Ime-Prezime-Broj. U .txt fajl ukucas 10 unosa. Taj fajl treba da ucitas i ispises u konzoli. */
+
+
+
+" Aleksandar-Mitrovic-064_888_11_00" ,
+
+" Luka-Jovic-064_888_11_01",
+
+" Dusan-Vlahovic-064_888_11_02",
+
+" Djordje-Jovanovic-064_888_11_03",
+
+" Darko-Lazovic-064_888_11_04",
+
+" Lazar-Samardzic-064_888_11_05",
+
+" Uros-Racic-064_888_11_06",
+
+" Nemanja-Maksimovic-064_888_11_07",
+
+" Filip-Kostic-064_888_11_08",
+
+" Dusan-Tadic-064_888_11_09",
+
+"Filip-Mladenovic-064_888_10
+
+
