@@ -23,6 +23,18 @@ void add( int* brojac, char* ime, char* prezime, char* broj, TKontakt* niz)
 
 }
 
+void printALL(TKontakt* niz, int size)
+{
+	int i = 0;
+	do
+	{
+		printf("%d) Ime: %s, Prezime: %s, Broj: %s\n\n", i + 1, niz[i].ime, niz[i].prezime, niz[i].broj);
+
+		i++;
+	}
+	while(i < size);
+}
+
 int main()
 {
 	FILE *file;
@@ -42,10 +54,7 @@ int main()
 
 	   fclose(file);
 
-	   for(int i = 0; i < brojac; i++)
-	   {
-		   printf("%d) Ime: %s, Prezime: %s, Broj_telefona: %s\n\n", i + 1, niz[i].ime, niz[i].prezime, niz[i].broj);
-	   }
+	   printALL(niz, brojac);
 }
 
 
