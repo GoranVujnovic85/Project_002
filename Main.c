@@ -35,26 +35,80 @@ void printALL(TKontakt* niz, int size)
 	while(i < size);
 }
 
-int main()
+void ucitaj_Format_Imenika(const char* filename)
 {
 	FILE *file;
 
-	char line[100];
+		char line[100];
 
-	file = fopen("Format_Imenika.txt", "r");
+		file = fopen("Format_Imenika.txt", "r");
 
-	  while (fgets(line, sizeof(line), file))
-	  {
-		  char* ime = strtok(line, "|");
-		  char* prezime = strtok(NULL, "|");
-		  char* broj = strtok(NULL, "\n");
+		  while (fgets(line, sizeof(line), file))
+		  {
+			  char* ime = strtok(line, "|");
+			  char* prezime = strtok(NULL, "|");
+			  char* broj = strtok(NULL, "\n");
 
-		  add(&brojac, ime, prezime, broj, niz);
-	  }
+			  add(&brojac, ime, prezime, broj, niz);
+		  }
 
-	   fclose(file);
+		   fclose(file);
+}
 
-	   printALL(niz, brojac);
+int main()
+{
+	const char* filename = "Format_Imenika.txt";
+
+	int opcija;
+	//printf("Izaberite opciju:\n\n\n");
+	//while(1)
+	for(int i = 0; i < 10; i++)
+	{
+		printf("Izaberite opciju:\n\n\n");
+		printf("1) Ucitavanje iImenika iz fajla!\n");
+		printf("2) Dodavanje novog kontakta!\n");
+		printf("3) Ispisi Imenik!\n");
+		printf("0) Ugasi program!\n");
+		scanf("%d", &opcija);
+
+		switch(opcija)
+		{
+		case 1:
+		{	ucitaj_Format_Imenika(filename);
+		}
+		break;
+
+		case 2:
+		{
+			printf("Nije jos podrzano!\n");
+		}
+		break;
+
+		case 3:
+		{
+			printALL(niz, brojac);
+		}
+		break;
+
+    default:
+
+	   switch(opcija)
+	    {
+		case 0:
+		{
+			printf("Nije jos podrzano!\n");
+		}
+		break;
+
+    default:
+		{
+			printf("Uneli ste pogresan broj! Molim Vas koristite brojeve u rasponu od 0 - 3!");
+		}
+		break;
+		}
+	   break;
+		}
+	}
 }
 
 
