@@ -31,6 +31,7 @@ void printALL(TKontakt* niz, int size)
 		printf("%d) Ime: %s, Prezime: %s, Broj: %s\n\n", i + 1, niz[i].ime, niz[i].prezime, niz[i].broj);
 
 		i++;
+		fflush(stdout);
 	}
 	while(i < size);
 }
@@ -60,27 +61,32 @@ int main()
 	const char* filename = "Format_Imenika.txt";
 
 	int opcija;
-	//printf("Izaberite opciju:\n\n\n");
-	//while(1)
-	for(int i = 0; i < 10; i++)
-	{
-		printf("Izaberite opciju:\n\n\n");
-		printf("1) Ucitavanje iImenika iz fajla!\n");
-		printf("2) Dodavanje novog kontakta!\n");
-		printf("3) Ispisi Imenik!\n");
-		printf("0) Ugasi program!\n");
-		scanf("%d", &opcija);
+
+	printf("Izaberite opciju:\n\n");
+
+	printf("1) Ucitavanje Imenika iz fajla!\n\n");
+	printf("2) Dodavanje novog kontakta!\n\n");
+	printf("3) Ispisi Imenik!\n\n");
+	printf("0) Ugasi program!\n\n");
+	fflush(stdout);
+
+while(1)
+{
+	scanf("%d", &opcija);
+	fflush(stdout);
 
 		switch(opcija)
 		{
 		case 1:
-		{	ucitaj_Format_Imenika(filename);
+		{
+			ucitaj_Format_Imenika(filename);
 		}
 		break;
 
 		case 2:
 		{
 			printf("Nije jos podrzano!\n");
+			fflush(stdout);
 		}
 		break;
 
@@ -97,22 +103,21 @@ int main()
 		case 0:
 		{
 			printf("Nije jos podrzano!\n");
+			fflush(stdout);
 		}
 		break;
 
     default:
 		{
 			printf("Uneli ste pogresan broj! Molim Vas koristite brojeve u rasponu od 0 - 3!");
+			fflush(stdout);
 		}
 		break;
 		}
 	   break;
 		}
-	}
 }
-
-
-
+}
 
 
 
