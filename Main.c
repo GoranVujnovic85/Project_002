@@ -1,5 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+#define Exit           0
+#define Read_Contacts  1
+#define Add_Contacts   2
+#define Print_Contacts 3
 
 typedef struct
 {
@@ -9,11 +15,11 @@ typedef struct
 
 }TKontakt;
 
-TKontakt niz[10];
+TKontakt niz[20];
 
 int brojac = 0;
 
-void add( int* brojac, char* ime, char* prezime, char* broj, TKontakt* niz)
+int add( int* brojac, char* ime, char* prezime, char* broj, TKontakt* niz)
 {
 	strcpy(niz[*brojac].ime, ime);
 	strcpy(niz[*brojac].prezime, prezime);
@@ -21,6 +27,7 @@ void add( int* brojac, char* ime, char* prezime, char* broj, TKontakt* niz)
 
    (*brojac)++;
 
+   return 1;
 }
 
 void printALL(TKontakt* niz, int size)
@@ -56,6 +63,38 @@ void ucitaj_Format_Imenika(const char* filename)
 		   fclose(file);
 }
 
+void stop_program()
+{
+	printf("Program je prekinut, pocinjemo ponovo!\n");
+	fflush(stdout);
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void add_Contacts()
+{
+	char ime[20], prezime[20], broj[20];
+
+	printf("Unesite ime novog korisnika: ");
+	fflush(stdout);
+	scanf("%s",ime);
+	printf("Unesite prezime novog korisnika: ");
+	fflush(stdout);
+	scanf("%s",prezime);
+	printf("Unesite broj novog korisnika: ");
+	fflush(stdout);
+	scanf("%s",broj);
+
+	if (add(&brojac, ime, prezime, broj, niz))
+	    {
+	        printf("Kontakt uspešno dodat!\n");
+	    }
+	    else
+	    {
+	        printf("Dodavanje kontakta nije uspelo!\n");
+	    }
+}
+
 int main()
 {
 	const char* filename = "Format_Imenika.txt";
@@ -64,46 +103,39 @@ int main()
 
 	printf("Izaberite opciju:\n\n");
 
+	printf("0) Ugasi program!\n\n");
 	printf("1) Ucitavanje Imenika iz fajla!\n\n");
 	printf("2) Dodavanje novog kontakta!\n\n");
 	printf("3) Ispisi Imenik!\n\n");
-	printf("0) Ugasi program!\n\n");
 	fflush(stdout);
 
 while(1)
 {
 	scanf("%d", &opcija);
-	fflush(stdout);
 
-		switch(opcija)
+	switch(opcija)
+{
+		case Exit:
 		{
-		case 1:
+			stop_program();
+		}
+		break;
+
+		case Read_Contacts:
 		{
 			ucitaj_Format_Imenika(filename);
 		}
 		break;
 
-		case 2:
+		case Add_Contacts:
 		{
-			printf("Nije jos podrzano!\n");
-			fflush(stdout);
+			add_Contacts();
 		}
 		break;
 
-		case 3:
+		case Print_Contacts:
 		{
 			printALL(niz, brojac);
-		}
-		break;
-
-    default:
-
-	   switch(opcija)
-	    {
-		case 0:
-		{
-			printf("Nije jos podrzano!\n");
-			fflush(stdout);
 		}
 		break;
 
@@ -113,11 +145,11 @@ while(1)
 			fflush(stdout);
 		}
 		break;
-		}
-	   break;
-		}
+	}
+
+  }
 }
-}
+
 
 
 
