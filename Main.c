@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
+
 
 #define Exit           0
 #define Read_Contacts  1
 #define Add_Contacts   2
 #define Print_Contacts 3
+
+const char* filename = "Format_Imenika.txt";
 
 typedef struct
 {
@@ -33,6 +37,7 @@ int add( int* brojac, char* ime, char* prezime, char* broj, TKontakt* niz)
 void printALL(TKontakt* niz, int size)
 {
 	int i = 0;
+
 	do
 	{
 		printf("%d) Ime: %s, Prezime: %s, Broj: %s\n\n", i + 1, niz[i].ime, niz[i].prezime, niz[i].broj);
@@ -61,14 +66,15 @@ void ucitaj_Format_Imenika(const char* filename)
 		  }
 
 		   fclose(file);
+
 }
 
-void stop_program()
+void prekini_program()
 {
-	printf("Program je prekinut, pocinjemo ponovo!\n");
+	printf("Program je prekinut!!!!!\n");
 	fflush(stdout);
-	int c;
-	while ((c = getchar()) != '\n' && c != EOF);
+	exit(1);
+
 }
 
 void add_Contacts()
@@ -87,7 +93,11 @@ void add_Contacts()
 
 	if (add(&brojac, ime, prezime, broj, niz))
 	    {
-	        printf("Kontakt uspešno dodat!\n");
+
+		    add_new_user_in_txt(filename, ime, prezime, broj);
+
+	        printf("Kontakt uspešno dodat!\n\n");
+
 	    }
 	    else
 	    {
@@ -95,9 +105,20 @@ void add_Contacts()
 	    }
 }
 
+void add_new_user_in_txt(const char* filename, const char* ime, const char* prezime, const char* broj)
+{
+	FILE *file;
+
+	file = fopen(filename, "a+");
+
+	fprintf(file, "%s|%s|%s\n", ime, prezime, broj);
+
+	fclose(file);
+
+}
+
 int main()
 {
-	const char* filename = "Format_Imenika.txt";
 
 	int opcija;
 
@@ -113,16 +134,18 @@ while(1)
 {
 	scanf("%d", &opcija);
 
+
 	switch(opcija)
 {
 		case Exit:
 		{
-			stop_program();
+			prekini_program();
 		}
 		break;
 
 		case Read_Contacts:
 		{
+
 			ucitaj_Format_Imenika(filename);
 		}
 		break;
