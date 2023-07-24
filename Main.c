@@ -29,9 +29,9 @@ int add( int* brojac, char* ime, char* prezime, char* broj, TKontakt* niz)
 	strcpy(niz[*brojac].prezime, prezime);
 	strcpy(niz[*brojac].broj, broj);
 
-   (*brojac)++;
+	(*brojac)++;
 
-   return 1;
+	return 1;
 }
 
 void printALL(TKontakt* niz, int size)
@@ -44,28 +44,29 @@ void printALL(TKontakt* niz, int size)
 
 		i++;
 		fflush(stdout);
-	}
-	while(i < size);
+
+	} while(i < size);
+
 }
 
 void ucitaj_Format_Imenika(const char* filename)
 {
 	FILE *file;
 
-		char line[100];
+	char line[100];
 
-		file = fopen("Format_Imenika.txt", "r");
+	file = fopen("Format_Imenika.txt", "r");
 
-		  while (fgets(line, sizeof(line), file))
-		  {
-			  char* ime = strtok(line, "|");
-			  char* prezime = strtok(NULL, "|");
-			  char* broj = strtok(NULL, "\n");
+	while (fgets(line, sizeof(line), file))
+	{
+		char* ime = strtok(line, "|");
+		char* prezime = strtok(NULL, "|");
+		char* broj = strtok(NULL, "\n");
 
-			  add(&brojac, ime, prezime, broj, niz);
-		  }
+		add(&brojac, ime, prezime, broj, niz);
+	}
 
-		   fclose(file);
+	fclose(file);
 
 }
 
@@ -92,17 +93,17 @@ void add_Contacts()
 	scanf("%s",broj);
 
 	if (add(&brojac, ime, prezime, broj, niz))
-	    {
+	{
 
-		    add_new_user_in_txt(filename, ime, prezime, broj);
+	add_new_user_in_txt(filename, ime, prezime, broj);
 
-	        printf("Kontakt uspešno dodat!\n\n");
+	printf("Kontakt uspešno dodat!\n\n");
 
-	    }
-	    else
-	    {
-	        printf("Dodavanje kontakta nije uspelo!\n");
-	    }
+	}
+	else
+	{
+	printf("Dodavanje kontakta nije uspelo!\n");
+	}
 }
 
 void add_new_user_in_txt(const char* filename, const char* ime, const char* prezime, const char* broj)
@@ -130,47 +131,46 @@ int main()
 	printf("3) Ispisi Imenik!\n\n");
 	fflush(stdout);
 
-while(1)
-{
-	scanf("%d", &opcija);
+	while(1)
+	{
+		scanf("%d",&opcija);
 
+			switch(opcija)
+			{
+				case Exit:
+				{
+					prekini_program();
+				}
+				break;
 
-	switch(opcija)
-{
-		case Exit:
-		{
-			prekini_program();
-		}
-		break;
+				case Read_Contacts:
+				{
 
-		case Read_Contacts:
-		{
+					ucitaj_Format_Imenika(filename);
+				}
+				break;
 
-			ucitaj_Format_Imenika(filename);
-		}
-		break;
+				case Add_Contacts:
+				{
+					add_Contacts();
+				}
+				break;
 
-		case Add_Contacts:
-		{
-			add_Contacts();
-		}
-		break;
+				case Print_Contacts:
+				{
+					printALL(niz, brojac);
+				}
+				break;
 
-		case Print_Contacts:
-		{
-			printALL(niz, brojac);
-		}
-		break;
+				default:
+				{
+					printf("Uneli ste pogresan broj! Molim Vas koristite brojeve u rasponu od 0 - 3!");
+					fflush(stdout);
+				}
+				break;
+			}
 
-    default:
-		{
-			printf("Uneli ste pogresan broj! Molim Vas koristite brojeve u rasponu od 0 - 3!");
-			fflush(stdout);
-		}
-		break;
 	}
-
-  }
 }
 
 
